@@ -1,20 +1,18 @@
-"use client"
+import { getKindeServerSession, LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/server";
 
-import {useKindeAuth} from "@kinde-oss/kinde-auth-nextjs";
-import {useRouter} from "next/navigation";
-import {useEffect} from "react";
+export default async function Protected({ children }) {
+    const { getUser } = getKindeServerSession()
+    const user = await getUser()
 
-export default function Protected({ children }) {
-  const router = useRouter();
-  const {isAuthenticated, isLoading} = useKindeAuth();
-
-  console.log("ISAUNTHETICAT" + isAuthenticated)
-
-  useEffect(() => {
-    if (!isLoading && !isAuthenticated) {
-      router.push("/");
-    }
-  }, [isLoading, isAuthenticated, router]);
-
-  return <div>{ children }</div>;
+    return (
+        user ? (
+            <div>
+                {children} <LogoutLink>Sign Out</LogoutLink>
+            </div>
+        ) : (
+            <div>
+                This page is protected, please <LoginLink>Login</LoginLink> to view it
+            </div>
+        )
+    )
 }
