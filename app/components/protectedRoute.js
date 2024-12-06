@@ -10,7 +10,7 @@ export default async function Protected({ children }) {
                 {children} <LogoutLink>Sign Out</LogoutLink>
             </div>
         ) : (
-            <div>
+            <div className="text-center">
                 This page is protected, please <LoginLink>Login</LoginLink> to view it
             </div>
         )

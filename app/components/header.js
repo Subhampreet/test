@@ -1,40 +1,46 @@
-"use client"
-
-import * as React from "react"
-import { Moon, Sun } from "lucide-react"
-import { useTheme } from "next-themes"
-
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+import Logo from "../../public/logo.png";
+import Image from "next/image";
+import { LoginLink, RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import { ModeToggle } from "./modeToggle";
 
-export function ModeToggle() {
-  const { setTheme } = useTheme()
 
+export default function Header() {
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon">
-          <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-          <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-          <span className="sr-only">Toggle theme</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
-          Light
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
-          Dark
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
-          System
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <div className="container mx-auto px-4 md:px-6 lg:px-8">
+      <header className="flex h-20 w-full shrink-0 items-center px-4 md:px-6">
+        <Link href="/" className="mr-6 hidden lg:flex" prefetch={false}>
+          <Image src={Logo} alt="Logo" className="w-20 hidden lg:block" />
+        </Link>
+        <div className="ml-auto flex gap-4">
+          <Link
+            href="#"
+            className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-white px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50 dark:data-[active]:bg-gray-800/50 dark:data-[state=open]:bg-gray-800/50"
+            prefetch={false}
+          >
+            Home
+          </Link>
+          <Link
+            href="#"
+            className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-white px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50 dark:data-[active]:bg-gray-800/50 dark:data-[state=open]:bg-gray-800/50"
+            prefetch={false}
+          >
+            About
+          </Link>
+          <LoginLink>
+            <Button variant="outline" className="justify-self-end px-4 py-1 text-sm">
+              Sign in
+            </Button>
+          </LoginLink>
+          <RegisterLink>
+            <Button className="justify-self-end px-4 py-1 text-sm">Sign Up</Button>
+          </RegisterLink>
+
+          <ModeToggle />
+        </div>
+      </header>
+    </div>
   )
 }
+
