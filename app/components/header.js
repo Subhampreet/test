@@ -34,12 +34,12 @@ export default function Header() {
             About
           </Link>
           <LoginLink>
-            <Button variant="outline" className="justify-self-end px-4 py-1 text-sm">
+            <Button variant="outline" className="justify-self-end px-5 py-5 text-sm rounded-full">
               Sign in
             </Button>
           </LoginLink>
           <RegisterLink>
-            <Button className="justify-self-end px-4 py-1 text-sm">Sign Up</Button>
+            <Button className="justify-self-end px-5 py-5 text-sm rounded-full">Sign Up</Button>
           </RegisterLink>
 
           <ModeToggle />
