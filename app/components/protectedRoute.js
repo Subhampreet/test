@@ -7,7 +7,7 @@ export default async function Protected({ children }) {
     return (
         user ? (
             <div>
-                {children} <LogoutLink>Sign Out</LogoutLink>
+                {children}
             </div>
         ) : (
             <div className="text-center">

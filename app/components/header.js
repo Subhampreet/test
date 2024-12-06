@@ -2,15 +2,22 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import Logo from "../../public/logo.png";
 import Image from "next/image";
-import { LoginLink, RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import { LoginLink, LogoutLink, RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { ModeToggle } from "./modeToggle";
 
 import { Covered_By_Your_Grace, Montserrat, Poppins, Roboto } from 'next/font/google';
 
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+
 const coveredByYourGrace = Covered_By_Your_Grace({ subsets: ['latin'], weight: ['400'], });
 
 
-export default function Header() {
+export default async function Header() {
+  const { getUser } = getKindeServerSession()
+  const user = await getUser()
+
+
+
   return (
     <div className="container mx-auto px-4 md:px-6 lg:px-8">
       <header className="flex h-20 w-full shrink-0 items-center px-4 md:px-6">
@@ -33,15 +40,29 @@ export default function Header() {
           >
             About
           </Link>
-          
-          <LoginLink>
-            <Button variant="outline" className="justify-self-end px-5 py-5 text-sm rounded-full">
-              Sign in
-            </Button>
-          </LoginLink>
-          <RegisterLink>
-            <Button className="justify-self-end px-5 py-5 text-sm rounded-full">Sign Up</Button>
-          </RegisterLink>
+
+          {
+            user ? (
+              <div>
+                <LogoutLink>
+                  <Button variant="outline" className="justify-self-end px-5 py-5 text-sm rounded-full">
+                    Sign Out
+                  </Button>
+                </LogoutLink>
+              </div>
+            ) : (
+              <div className="ml-auto flex gap-4 items-center">
+                <LoginLink>
+                  <Button variant="outline" className="justify-self-end px-5 py-5 text-sm rounded-full">
+                    Sign in
+                  </Button>
+                </LoginLink>
+                <RegisterLink>
+                  <Button className="justify-self-end px-5 py-5 text-sm rounded-full">Sign Up</Button>
+                </RegisterLink>
+              </div>
+            )
+          }
 
           <ModeToggle />
         </div>

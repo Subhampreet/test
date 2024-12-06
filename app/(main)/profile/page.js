@@ -1,5 +1,6 @@
 import Protected from "@/app/components/protectedRoute";
-import { getKindeServerSession, LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/server";
+import { getKindeServerSession} from "@kinde-oss/kinde-auth-nextjs/server";
+import ProfilePage from "./ProfilePage";
 
 
 export default async function Profile() {
@@ -8,7 +9,7 @@ export default async function Profile() {
 
     return (
         <Protected>
-            Hello from Profile Page
+            <ProfilePage />
         </Protected>
     )
 }
