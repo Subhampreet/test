@@ -5,13 +5,18 @@ import Image from "next/image";
 import { LoginLink, RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { ModeToggle } from "./modeToggle";
 
+import { Covered_By_Your_Grace, Montserrat, Poppins, Roboto } from 'next/font/google';
+
+const coveredByYourGrace = Covered_By_Your_Grace({ subsets: ['latin'], weight: ['400'], });
+
 
 export default function Header() {
   return (
     <div className="container mx-auto px-4 md:px-6 lg:px-8">
       <header className="flex h-20 w-full shrink-0 items-center px-4 md:px-6">
-        <Link href="/" className="mr-6 hidden lg:flex" prefetch={false}>
-          <Image src={Logo} alt="Logo" className="w-20 hidden lg:block" />
+        <Link href="/" className="mr-6 hidden lg:flex items-center gap-2" prefetch={false}>
+          <Image src={Logo} alt="Logo" className="w-14 hidden lg:block" />
+          <div className={`${coveredByYourGrace.className} text-2xl`}>buy me a pizza</div>
         </Link>
         <div className="ml-auto flex gap-4">
           <Link
